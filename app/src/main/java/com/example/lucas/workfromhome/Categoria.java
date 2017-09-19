@@ -1,12 +1,15 @@
 package com.example.lucas.workfromhome;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mdominguez on 07/09/16.
  */
-public class Categoria {
+public class Categoria implements Parcelable{
     private Integer id;
     private String descripcion;
     private List<Trabajo> trabajos;
@@ -20,6 +23,23 @@ public class Categoria {
         this.id = id;
         this.descripcion = desc;
     }
+
+    protected Categoria(Parcel in) {
+        descripcion = in.readString();
+        trabajos = in.createTypedArrayList(Trabajo.CREATOR);
+    }
+
+    public static final Creator<Categoria> CREATOR = new Creator<Categoria>() {
+        @Override
+        public Categoria createFromParcel(Parcel in) {
+            return new Categoria(in);
+        }
+
+        @Override
+        public Categoria[] newArray(int size) {
+            return new Categoria[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -57,4 +77,14 @@ public class Categoria {
             new Categoria(5,"Mobile Developer")
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(descripcion);
+        parcel.writeTypedList(trabajos);
+    }
 }

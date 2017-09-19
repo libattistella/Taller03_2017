@@ -1,5 +1,9 @@
 package com.example.lucas.workfromhome;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Random;
@@ -7,7 +11,7 @@ import java.util.Random;
 /**
  * Created by mdominguez on 07/09/16.
  */
-public class Trabajo implements Serializable {
+public class Trabajo implements Parcelable {
 
     private Integer id;
     private String descripcion;
@@ -26,6 +30,7 @@ public class Trabajo implements Serializable {
         long ts =(long) (System.currentTimeMillis()+dias*1000*60*60*24);
         this.fechaEntrega = new Date(ts);
         this.precioMaximoHora=r.nextDouble()*(10+r.nextInt(100));
+        Log.v("PRECIO", (this.precioMaximoHora).toString());
         this.horasPresupuestadas = dias/ 4+r.nextInt(6);
         this.categoria= Categoria.CATEGORIAS_MOCK[r.nextInt(5)];
     }
@@ -34,6 +39,7 @@ public class Trabajo implements Serializable {
         this();
         this.id = id;
         this.descripcion = desc;
+        Log.v("DESCRIPCION", this.descripcion);
     }
 
     public Trabajo(Integer id, String desc, Categoria cat){
@@ -42,6 +48,24 @@ public class Trabajo implements Serializable {
         this.descripcion = desc;
         this.categoria = cat;
     }
+
+
+    protected Trabajo(Parcel in) {
+        descripcion = in.readString();
+        categoria = in.readParcelable(Categoria.class.getClassLoader());
+    }
+
+    public static final Creator<Trabajo> CREATOR = new Creator<Trabajo>() {
+        @Override
+        public Trabajo createFromParcel(Parcel in) {
+            return new Trabajo(in);
+        }
+
+        @Override
+        public Trabajo[] newArray(int size) {
+            return new Trabajo[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -128,4 +152,19 @@ public class Trabajo implements Serializable {
             new Trabajo(18,"Sitio Coroporativo"),
             new Trabajo(19,"Aplicacion www1")
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(descripcion);
+        parcel.writeParcelable(categoria, i);
+        parcel.writeInt(id);
+        parcel.writeInt(horasPresupuestadas);
+        parcel.writeInt(monedaPago);
+        parcel.writeDouble(precioMaximoHora);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.lucas.workfromhome;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by NightCrawler-Nbook on 14/09/2017.
- */
 
 public class AdaptadorLaboral extends BaseAdapter {
 
@@ -66,8 +64,11 @@ public class AdaptadorLaboral extends BaseAdapter {
         holder.tvCategoria.setText(item.getCategoria().getDescripcion());
         holder.tvTrabajo.setText(item.getDescripcion());
         holder.tvHoras.setText("Horas: "+item.getHorasPresupuestadas());
+        //holder.tvPrecio.setText("Max $/Hora: ");
         holder.tvPrecio.setText("Max $/Hora: "+df.format(item.getPrecioMaximoHora()));
+        //holder.tvFecha.setText("Fecha Fin: ");
         holder.tvFecha.setText("Fecha Fin: "+sdf.format(item.getFechaEntrega()));
+        //holder.cbEnIngles.setChecked(false);
         holder.cbEnIngles.setChecked(item.getRequiereIngles());
 
         switch(item.getMonedaPago()){
