@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/postularse" android:title="@string/postularse"/>
+    <item android:id="@+id/no_me_interesa" android:title="@string/no_me_interesa"/>
+</menu>
