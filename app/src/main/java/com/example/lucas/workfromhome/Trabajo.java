@@ -53,6 +53,12 @@ public class Trabajo implements Parcelable {
     protected Trabajo(Parcel in) {
         descripcion = in.readString();
         categoria = in.readParcelable(Categoria.class.getClassLoader());
+        id = in.readInt();
+        horasPresupuestadas = in.readInt();
+        monedaPago = in.readInt();
+        precioMaximoHora = in.readDouble();
+        fechaEntrega = new Date(in.readLong() * 1000);
+        requiereIngles = in.readByte() != 0;
     }
 
     public static final Creator<Trabajo> CREATOR = new Creator<Trabajo>() {
@@ -166,5 +172,7 @@ public class Trabajo implements Parcelable {
         parcel.writeInt(horasPresupuestadas);
         parcel.writeInt(monedaPago);
         parcel.writeDouble(precioMaximoHora);
+        parcel.writeValue(fechaEntrega);
+        parcel.writeByte((byte) (requiereIngles ? 1 : 0));
     }
 }
