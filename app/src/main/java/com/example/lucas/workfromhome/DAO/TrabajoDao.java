@@ -13,8 +13,6 @@ public interface TrabajoDao {
 
     public void crearOferta(Trabajo p);
 
-    public Trabajo cargarOferta();
-
     public Trabajo[] listaTrabajos();
 
 }

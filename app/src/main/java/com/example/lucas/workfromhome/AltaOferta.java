@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.lucas.workfromhome.DAO.TrabajoDAOJSON;
+import com.example.lucas.workfromhome.DAO.TrabajoDao;
+import com.example.lucas.workfromhome.DAO.TrabajoDaoSQLite;
+
 import java.io.Serializable;
 
 public class AltaOferta extends AppCompatActivity {
@@ -15,6 +19,8 @@ public class AltaOferta extends AppCompatActivity {
     private Button btnAdd;
     private EditText nombreOferta;
     private transient Trabajo ofertaLaboral;
+    public TrabajoDao trabajoDaoSQLite = new TrabajoDaoSQLite(AltaOferta.this);
+    public TrabajoDao trabajoDAOJSON = new TrabajoDAOJSON(AltaOferta.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,11 @@ public class AltaOferta extends AppCompatActivity {
                 switch (view.getId()){
                     case R.id.btnAddOferta:
                         ofertaLaboral = new Trabajo(99,nombreOferta.getText().toString());
+
+                        //Guardamos la oferta
+                        trabajoDaoSQLite.crearOferta(ofertaLaboral);
+                        trabajoDAOJSON.crearOferta(ofertaLaboral);
+
                         Intent intent = getIntent();
                         // Le metemos el resultado que queremos mandar a la actividad principal.
                         intent.putExtra("oferta", ofertaLaboral);

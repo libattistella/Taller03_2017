@@ -37,15 +37,13 @@ public class TrabajoDaoSQLite implements TrabajoDao {
         cv.put("FECHA_ENTREGA", String.valueOf(p.getFechaEntrega()));
         cv.put("MONEDA_PAGO", p.getMonedaPago());
         cv.put("REQUIERE_INGLES", p.getRequiereIngles());
-    }
-
-    @Override
-    public Trabajo cargarOferta() {
-        return null;
+        db.insert("TRABAJO",null,cv);
     }
 
     @Override
     public Trabajo[] listaTrabajos() {
-        return new Trabajo[0];
+        SQLiteDatabase db =myHelper.getReadableDatabase();
+        return null;
+        //return db.rawQuery("SELECT ID _id,NOMBRE,DESCRIPCION,ID_TIPO_PLATO,PRECIO FROM PLATO",null);
     }
 }

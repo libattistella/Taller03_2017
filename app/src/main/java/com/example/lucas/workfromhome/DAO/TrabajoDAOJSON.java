@@ -90,11 +90,6 @@ public class TrabajoDAOJSON implements TrabajoDao{
     }
 
     @Override
-    public Trabajo cargarOferta() {
-        return null;
-    }
-
-    @Override
     public Trabajo[] listaTrabajos() {
         if(!fileExists(this.filename)){
             this.inicializar();
