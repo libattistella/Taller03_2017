@@ -140,7 +140,7 @@ public class Trabajo implements Parcelable {
     public static final Trabajo[] TRABAJOS_MOCK= new Trabajo[]{
             new Trabajo(1,"Proyecto ABc"),
             new Trabajo(2,"Sistema de Gestion"),
-            new Trabajo(3, "Aplicacion XYZ"),
+            new Trabajo(3,"Aplicacion XYZ"),
             new Trabajo(4,"Modulo NN1"),
             new Trabajo(5,"Sistema de adminisracion TDF"),
             new Trabajo(6,"Aplicacion OYU 66"),

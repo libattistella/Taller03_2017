@@ -19,7 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AltaOferta"></activity>
+        <activity android:name=".AltaOferta" />
+
+        <service
+            android:name=".TrabajoService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
